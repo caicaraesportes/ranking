@@ -44,15 +44,13 @@ inherited Form2_Surface: TForm2_Surface
   inherited Button3: TButton
     Size.Width = 1080.000000000000000000
   end
-  inherited Timer1: TTimer [4]
-  end
-  inherited Memo1: TMemo [5]
+  inherited Memo1: TMemo
     Size.Width = 1080.000000000000000000
     Size.Height = 1469.000000000000000000
     Viewport.Width = 1080.000000000000000000
     Viewport.Height = 1469.000000000000000000
   end
-  inherited pnConfirma: TPanel [6]
+  inherited pnConfirma: TPanel
     Size.Width = 1080.000000000000000000
     inherited lbSeq1: TLabel
       Size.Width = 1080.000000000000000000

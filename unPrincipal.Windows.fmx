@@ -22,12 +22,8 @@ inherited frmPrincipal: TfrmPrincipal
       Position.Y = 37.000000000000000000
     end
   end
-  inherited Timer1: TTimer [4]
-  end
-  inherited Memo1: TMemo [5]
+  inherited Memo1: TMemo
     Viewport.Width = 411.000000000000000000
     Viewport.Height = 148.000000000000000000
-  end
-  inherited pnConfirma: TPanel [6]
   end
 end

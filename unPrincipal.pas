@@ -181,7 +181,7 @@ end;
 
 procedure TForm2.btConfirmarClick(Sender: TObject);
 Var
-campos,confere : string;
+campos,confere, idjogo : string;
 begin
 
 //o campo confere do jogo vai ser os 4 id dos jogadores + final 24
@@ -191,7 +191,14 @@ confere := FormatFloat('000', Selecionados[0].ID)+
            FormatFloat('000', Selecionados[1].ID)+
            FormatFloat('000', Selecionados[2].ID)+
            FormatFloat('000', Selecionados[3].ID)+'24';
+//gravando jogo
 fPostApi('jogo','{ "confere": "'+confere+'" }');
+idJogo:= fGetApi('jogo','id','confere=eq.'+confere );
+
+//gravando jogadores
+fPostApi('jogo_atleta','{ "confere": "'+confere+'" }');
+
+
 end;
 
 procedure TForm2.Button2Click(Sender: TObject);
@@ -232,7 +239,6 @@ idJogo,confere : String;
       begin
         Key := Item[I];
         J := I - 1;
-
         while (J >= 0) and (Item[J].ID > Key.ID) do
         begin
           Item[J + 1] := Item[J];
@@ -243,6 +249,7 @@ idJogo,confere : String;
     end;
 begin
 pnConfirma.Visible:=False;
+pnJogos.Visible := False;
 ResDupla1.Value:=0;
 ResDupla2.Value:=0;
 ResDupla3.Value:=0;
@@ -306,6 +313,7 @@ lbDupla4.Text := Selecionados[2].Nome+'/'+Selecionados[1].Nome;
 
 lbDupla5.Text := Selecionados[0].Nome+'/'+Selecionados[2].Nome;
 lbDupla6.Text := Selecionados[3].Nome+'/'+Selecionados[1].Nome;
+pnJogos.Visible := True;
 end;
 
 procedure TForm2.Button3Click(Sender: TObject);
@@ -345,6 +353,7 @@ max : integer;
   Result := Maximo;
   End;
 begin
+pnConfirma.Visible:=False;
 //verificando se todos os jogos alcaram >=15 pontos
 if (resDupla1.Value+resDupla2.Value<15) or
    (resDupla3.Value+resDupla4.Value<15) or
@@ -408,7 +417,6 @@ try
   HTTPClient := THTTPClient.Create;
   HTTPClient.CustomHeaders['apikey'] := ApiKey;
   HTTPClient.CustomHeaders['Accept'] := 'application/json';
-
   HTTPClient.SecureProtocols := [THTTPSecureProtocol.TLS12];
   RequestBody := TStringStream.Create(Campos, TEncoding.UTF8);
   Response := HTTPClient.Post(BaseURL + '/rest/v1/' + Tabela, RequestBody, nil, [TNetHeader.Create('Content-Type', 'application/json')]);
@@ -518,6 +526,7 @@ end;
 procedure TForm2.FormCreate(Sender: TObject);
 begin
 pnConfirma.Visible:=False;
+pnJogos.Visible := False;
 end;
 
 end.
