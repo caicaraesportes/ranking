@@ -1,0 +1,85 @@
+inherited Form2_NmXhdpiPh: TForm2_NmXhdpiPh
+  ClientHeight = 615
+  ClientWidth = 400
+  DesignerMasterStyle = 3
+  inherited Panel1: TPanel
+    Size.Width = 400.000000000000000000
+  end
+  inherited Panel4: TPanel
+    Size.Width = 400.000000000000000000
+    inherited Panel3: TPanel
+      Size.Width = 106.000000000000000000
+      inherited Button2: TButton
+        Size.Width = 106.000000000000000000
+      end
+      inherited Label6: TLabel
+        Size.Width = 106.000000000000000000
+      end
+      inherited DateEdit1: TDateEdit
+        Size.Width = 106.000000000000000000
+      end
+    end
+  end
+  inherited pnJogos: TPanel
+    Size.Width = 400.000000000000000000
+    inherited Label1: TLabel
+      Position.Y = 111.000000000000000000
+      Size.Width = 400.000000000000000000
+    end
+    inherited Panel6: TPanel
+      Size.Width = 400.000000000000000000
+      inherited resDupla1: TNumberBox
+        Size.Height = 32.000000000000000000
+      end
+      inherited resDupla2: TNumberBox
+        Size.Height = 32.000000000000000000
+      end
+    end
+    inherited Panel7: TPanel
+      Position.Y = 74.000000000000000000
+      Size.Width = 400.000000000000000000
+      inherited resDupla5: TNumberBox
+        Size.Height = 32.000000000000000000
+      end
+      inherited resDupla6: TNumberBox
+        Size.Height = 32.000000000000000000
+      end
+    end
+    inherited Panel8: TPanel
+      Position.Y = 37.000000000000000000
+      Size.Width = 400.000000000000000000
+      inherited resDupla3: TNumberBox
+        Size.Height = 32.000000000000000000
+      end
+      inherited resDupla4: TNumberBox
+        Size.Height = 32.000000000000000000
+      end
+    end
+  end
+  inherited Button3: TButton
+    Size.Width = 400.000000000000000000
+  end
+  inherited Timer1: TTimer [4]
+  end
+  inherited Memo1: TMemo [5]
+    Size.Width = 400.000000000000000000
+    Size.Height = 164.000000000000000000
+    Viewport.Width = 400.000000000000000000
+    Viewport.Height = 164.000000000000000000
+  end
+  inherited pnConfirma: TPanel [6]
+    Size.Width = 400.000000000000000000
+    inherited lbSeq1: TLabel
+      Size.Width = 400.000000000000000000
+    end
+    inherited lbSeq3: TLabel
+      Size.Width = 400.000000000000000000
+    end
+    inherited lbSeq2: TLabel
+      Size.Width = 400.000000000000000000
+    end
+    inherited btConfirmar: TButton
+      Size.Width = 400.000000000000000000
+    end
+  end
+end

@@ -1,0 +1,33 @@
+inherited frmPrincipal: TfrmPrincipal
+  DesignerMasterStyle = 3
+  inherited Panel4: TPanel
+    inherited Panel3: TPanel
+      inherited Label6: TLabel
+        Position.Y = -17.454544067382810000
+      end
+      inherited DateEdit1: TDateEdit
+        Position.Y = 9.545455932617188000
+        Size.Height = 75.454544067382810000
+      end
+    end
+  end
+  inherited pnJogos: TPanel
+    inherited Label1: TLabel
+      Position.Y = 111.000000000000000000
+    end
+    inherited Panel7: TPanel
+      Position.Y = 74.000000000000000000
+    end
+    inherited Panel8: TPanel
+      Position.Y = 37.000000000000000000
+    end
+  end
+  inherited Timer1: TTimer [4]
+  end
+  inherited Memo1: TMemo [5]
+    Viewport.Width = 411.000000000000000000
+    Viewport.Height = 148.000000000000000000
+  end
+  inherited pnConfirma: TPanel [6]
+  end
+end

@@ -1,0 +1,445 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 599
+  ClientWidth = 411
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object Panel1: TPanel
+    Align = Top
+    Size.Width = 411.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 78
+    object Label2: TLabel
+      Align = Left
+      Size.Width = 277.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Selecione os 4 jogadores'
+      TabOrder = 84
+    end
+  end
+  object Panel4: TPanel
+    Align = Top
+    Position.Y = 49.000000000000000000
+    Size.Width = 411.000000000000000000
+    Size.Height = 128.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 79
+    object Panel2: TPanel
+      Align = Left
+      Size.Width = 294.000000000000000000
+      Size.Height = 128.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object ComboBox1: TComboBox
+        Align = Top
+        Size.Width = 294.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+      end
+      object ComboBox2: TComboBox
+        Align = Top
+        Position.Y = 64.000000000000000000
+        Size.Width = 294.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+      end
+      object ComboBox3: TComboBox
+        Align = Top
+        Position.Y = 32.000000000000000000
+        Size.Width = 294.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+      object ComboBox4: TComboBox
+        Align = Top
+        Position.Y = 96.000000000000000000
+        Size.Width = 294.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+    object Panel3: TPanel
+      Align = Client
+      Size.Width = 117.000000000000000000
+      Size.Height = 128.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object Button2: TButton
+        Align = Bottom
+        Position.Y = 85.000000000000000000
+        Size.Width = 117.000000000000000000
+        Size.Height = 43.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 90
+        Text = 'Criar Jogos'
+        OnClick = Button2Click
+      end
+      object Label6: TLabel
+        Align = Bottom
+        Position.Y = 26.000000000000000000
+        Size.Width = 117.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Center
+        Text = 'Data do Jogo'
+        TabOrder = 86
+      end
+      object DateEdit1: TDateEdit
+        Date = 45489.000000000000000000
+        Align = Bottom
+        Position.Y = 53.000000000000000000
+        Size.Width = 117.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 93
+        TextSettings.HorzAlign = Center
+      end
+    end
+  end
+  object pnJogos: TPanel
+    Align = Top
+    Position.Y = 177.000000000000000000
+    Size.Width = 411.000000000000000000
+    Size.Height = 140.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 80
+    object Label1: TLabel
+      Align = Top
+      Size.Width = 411.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Center
+      Text = 'Informe abaixo o resultados dos jogos'
+      TabOrder = 79
+    end
+    object Panel6: TPanel
+      Align = Top
+      Position.Y = 29.000000000000000000
+      Size.Width = 411.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 81
+      object lbDupla1: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 2.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 170.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Dupla 1'
+        TabOrder = 86
+      end
+      object Label8: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 206.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 11.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'X'
+        TabOrder = 84
+      end
+      object lbDupla2: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 252.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 155.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Trailing
+        Text = 'Dupla 2'
+        TabOrder = 83
+      end
+      object resDupla1: TNumberBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 92
+        Cursor = crIBeam
+        TextSettings.HorzAlign = Center
+        Position.X = 174.000000000000000000
+        Position.Y = 5.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 30.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object resDupla2: TNumberBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 91
+        Cursor = crIBeam
+        TextSettings.HorzAlign = Center
+        Position.X = 219.000000000000000000
+        Position.Y = 5.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 31.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object Panel7: TPanel
+      Align = Top
+      Position.Y = 103.000000000000000000
+      Size.Width = 411.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 83
+      object lbDupla5: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 2.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 170.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Dupla 5'
+        TabOrder = 85
+      end
+      object Label4: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 206.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 11.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'X'
+        TabOrder = 83
+      end
+      object lbDupla6: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 252.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 155.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Trailing
+        Text = 'Dupla 6'
+        TabOrder = 82
+      end
+      object resDupla5: TNumberBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 91
+        Cursor = crIBeam
+        TextSettings.HorzAlign = Center
+        Position.X = 174.000000000000000000
+        Position.Y = 5.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 30.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object resDupla6: TNumberBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 90
+        Cursor = crIBeam
+        TextSettings.HorzAlign = Center
+        Position.X = 219.000000000000000000
+        Position.Y = 5.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 31.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object Panel8: TPanel
+      Align = Top
+      Position.Y = 66.000000000000000000
+      Size.Width = 411.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 82
+      object lbDupla3: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 2.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 170.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Dupla 3'
+        TabOrder = 86
+      end
+      object Label12: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 206.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 11.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'X'
+        TabOrder = 84
+      end
+      object lbDupla4: TLabel
+        Align = Left
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 252.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 155.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Trailing
+        Text = 'Dupla 4'
+        TabOrder = 83
+      end
+      object resDupla3: TNumberBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 92
+        Cursor = crIBeam
+        TextSettings.HorzAlign = Center
+        Position.X = 174.000000000000000000
+        Position.Y = 5.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 30.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object resDupla4: TNumberBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 91
+        Cursor = crIBeam
+        TextSettings.HorzAlign = Center
+        Position.X = 219.000000000000000000
+        Position.Y = 5.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 31.000000000000000000
+        Size.Height = 27.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
+  object Button3: TButton
+    Align = Top
+    Position.Y = 317.000000000000000000
+    Size.Width = 411.000000000000000000
+    Size.Height = 36.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 81
+    Text = 'Gravar Jogos'
+    OnClick = Button3Click
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Align = Client
+    Size.Width = 411.000000000000000000
+    Size.Height = 148.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 83
+    Viewport.Width = 407.000000000000000000
+    Viewport.Height = 144.000000000000000000
+  end
+  object pnConfirma: TPanel
+    Align = Top
+    Position.Y = 353.000000000000000000
+    Size.Width = 411.000000000000000000
+    Size.Height = 98.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 84
+    object lbSeq1: TLabel
+      Align = Top
+      StyledSettings = [Size, Style, FontColor]
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 411.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Courier New'
+      TextSettings.HorzAlign = Center
+      Text = 'lbSeq1'
+      TabOrder = 2
+    end
+    object lbSeq3: TLabel
+      Align = Top
+      StyledSettings = [Size, Style, FontColor]
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 44.000000000000000000
+      Size.Width = 411.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Courier New'
+      TextSettings.HorzAlign = Center
+      Text = 'lbSeq3'
+      TabOrder = 1
+    end
+    object lbSeq2: TLabel
+      Align = Top
+      StyledSettings = [Size, Style, FontColor]
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 22.000000000000000000
+      Size.Width = 411.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Courier New'
+      TextSettings.HorzAlign = Center
+      Text = 'lbSeq2'
+      TabOrder = 0
+    end
+    object btConfirmar: TButton
+      Align = Top
+      Position.Y = 66.000000000000000000
+      Size.Width = 411.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Confirmar Grava'#231#227'o'
+      OnClick = btConfirmarClick
+    end
+  end
+  object Timer1: TTimer
+    Interval = 10
+    OnTimer = Timer1Timer
+    Left = 200
+    Top = 24
+  end
+end
