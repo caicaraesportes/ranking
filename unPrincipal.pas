@@ -15,15 +15,15 @@ uses
   FMX.DateTimeCtrls, FMX.Memo.Types, FMX.ScrollBox, FMX.Memo;
 
 type
-  TItemInfo = record
-    ID: Integer;
-    Nome: string;
-  end;
-  TItemArray = array[0..3] of TItemInfo;
+
   TAtleta = class
     Id: Integer;
     Nome: string;
+    Ranking :Integer;
   end;
+  TSelecionadosArray = array[0..3] of TAtleta;
+  TAtletasArray = array[0..1000] of TAtleta;
+
   TForm2 = class(TForm)
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
@@ -44,20 +44,20 @@ type
     Panel4: TPanel;
     pnJogos: TPanel;
     Label1: TLabel;
-    Panel6: TPanel;
-    Panel7: TPanel;
+    pnSeq1: TPanel;
+    pnSeq3: TPanel;
     lbDupla5: TLabel;
     Label4: TLabel;
     lbDupla6: TLabel;
     resDupla5: TNumberBox;
     resDupla6: TNumberBox;
-    Panel8: TPanel;
+    pnSeq2: TPanel;
     lbDupla3: TLabel;
     Label12: TLabel;
     lbDupla4: TLabel;
     resDupla3: TNumberBox;
     resDupla4: TNumberBox;
-    Button3: TButton;
+    btnPreparaGravacao: TButton;
     Timer1: TTimer;
     Memo1: TMemo;
     pnConfirma: TPanel;
@@ -65,8 +65,11 @@ type
     lbSeq3: TLabel;
     lbSeq2: TLabel;
     btConfirmar: TButton;
+    lbRan1: TLabel;
+    lbRan2: TLabel;
+    lbRan3: TLabel;
     procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure btnPreparaGravacaoClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btConfirmarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -78,13 +81,15 @@ type
     function fPostApi(tabela, Campos: String): boolean;
     procedure EncheCombos;
     procedure Log(texto: String);
+    function PegaAtleta(id: integer): TAtleta;
   public
     { Public declarations }
   end;
 
 var
   Form2: TForm2;
-  Selecionados: TItemArray;
+  Selecionados: TSelecionadosArray;
+  ListaAtletas : TAtletasArray;
 
 
 Const
@@ -125,6 +130,7 @@ begin
       try
         AtletaItem.Id := JSONObject.GetValue<Integer>('id');
         AtletaItem.Nome := JSONObject.GetValue<string>('nome');
+        AtletaItem.Ranking := JSONObject.GetValue<Integer>('ranking');
 //        AtletaItem.Versao := JSONObject.GetValue<string>('versao');
 //        if TryISO8601ToDate(JSONObject.GetValue<string>('data'), Data) then
 //          AtletaItem.Data := Data;
@@ -144,6 +150,13 @@ procedure TForm2.Timer1Timer(Sender: TObject);
 begin
 timer1.Enabled:=False;
 EncheCombos();
+{$IFDEF DEBUG}
+Combobox1.ItemIndex:=1;
+Combobox2.ItemIndex:=2;
+Combobox3.ItemIndex:=3;
+Combobox4.ItemIndex:=4;
+{$ENDIF}
+
 end;
 
 procedure TForm2.EncheCombos();
@@ -157,7 +170,7 @@ var
 
   procedure EncheCombo(ComboBox: TComboBox);
   begin
-    ComboBox.Items.Add(Records[I].Nome);
+    ComboBox.Items.Add(Records[I].Nome + ' - ' + IntToStr(Records[I].Ranking));
     ComboBox.Items.Objects[ComboBox.Items.Count - 1] := TObject(Records[I].Id);
   end;
 Begin
@@ -172,6 +185,10 @@ Begin
           EncheCombo(ComboBox2);
           EncheCombo(ComboBox3);
           EncheCombo(ComboBox4);
+          ListaAtletas[i] := TAtleta.Create;
+          ListaAtletas[i].id:= Records[i].id;
+          ListaAtletas[i].Nome:= Records[i].Nome;
+          ListaAtletas[i].Ranking:= Records[i].Ranking;
           end;
      finally
        Records.Free;
@@ -182,6 +199,36 @@ end;
 procedure TForm2.btConfirmarClick(Sender: TObject);
 Var
 campos,confere, idjogo : string;
+i : integer;
+
+    Procedure GravaSequencia(seq : integer; SeqAtleta:string; ResA,ResB:tNumberBox);
+    Var
+    y : integer;
+    idSeq : string;
+    Begin
+    //gravando jogo_sequencia id_jogo sequencia pontos_a pontos_b
+    //Sequencia1
+    campos:=' "id_jogo": "'+idJogo+'", ';
+    campos:= campos+' "sequencia": "'+IntToStr(seq)+'", ';
+    campos:= campos+'  "pontos_a": "'+FloatToStr(ResA.Value)+'", ';
+    campos:= campos+'  "pontos_b": "'+FloatToStr(ResB.Value)+'" ';
+    campos:= '{ '+campos+' }';
+    fPostApi('jogo_sequencia',campos);
+    idSeq:= fGetApi('jogo_sequencia','id','id_jogo=eq.'+idJogo+'&sequencia=eq.'+IntToStr(seq));
+
+    for y:=0 to 3 do //grava os 4 atletas por sequencia, 1 em cada registro, ficara mais facil somar depoi
+       Begin
+        //gravando jogo_sequencia_atleta id_jogo_sequencia id_atleta pontos_ranking
+        campos:=' "id_jogo_sequencia": "'+idSeq+'", ';
+        campos:= campos+'  "id_atleta": "'+IntToStr(Selecionados[StrToInt(SeqAtleta[y+1])].Id)+'", ';
+        if y<2 then
+          campos:= campos+'  "pontos_ranking": "'+IntToStr(ResA.Tag)+'" '
+          else
+          campos:= campos+'  "pontos_ranking": "'+IntToStr(ResB.Tag)+'" ';
+        campos:= '{ '+campos+' }';
+        fPostApi('jogo_sequencia_atleta',campos);
+       End;
+    End;
 begin
 
 //o campo confere do jogo vai ser os 4 id dos jogadores + final 24
@@ -195,20 +242,54 @@ confere := FormatFloat('000', Selecionados[0].ID)+
 fPostApi('jogo','{ "confere": "'+confere+'" }');
 idJogo:= fGetApi('jogo','id','confere=eq.'+confere );
 
-//gravando jogadores
-fPostApi('jogo_atleta','{ "confere": "'+confere+'" }');
+//gravando jogo_atleta ID id_jogo  id_atleta ranking_inicio
+for i:=0 to 3 do
+     Begin
+      campos:=' "id_jogo": "'+idJogo+'", ';
+      campos:= campos+' "id_atleta": "'+IntToStr(Selecionados[i].Id)+'", ';
+      campos:= campos+'  "ranking_inicio": "'+IntToStr(Selecionados[i].Ranking)+'" ';
+      campos:= '{ '+campos+' }';
+      fPostApi('jogo_atleta',campos);
+     End;
 
+GravaSequencia(1, '0123',resDupla1,resDupla2);
+GravaSequencia(2, '0321',resDupla3,resDupla4);
+GravaSequencia(3, '0231',resDupla5,resDupla6);
 
+ShowMessage('Gravado com sucesso!!!');
 end;
+
+Function TForm2.PegaAtleta(id:integer):TAtleta;
+Var
+i : integer;
+AtletaItem : TAtleta;
+Begin
+    try
+     AtletaItem := TAtleta.Create;
+
+     for I := 0 to 1000 - 1 do
+        begin
+        if id = ListaAtletas[i].Id then
+           Begin
+           AtletaItem := ListaAtletas[i];
+           result:= AtletaItem;
+           break;
+           End;
+        end;
+    except
+      AtletaItem.Free;
+      raise;
+    end;
+End;
 
 procedure TForm2.Button2Click(Sender: TObject);
 Var
 idJogo,confere : String;
 
-    function HasDuplicateIDs(const Item: TItemArray): Boolean;
+    function HasDuplicateIDs(const Item: TSelecionadosArray): Boolean;
     var
       IDs: TDictionary<Integer, Boolean>;
-      Person: TItemInfo;
+      Person: TAtleta;
     begin
       Result := False;
       IDs := TDictionary<Integer, Boolean>.Create;
@@ -230,10 +311,10 @@ idJogo,confere : String;
       end;
     end;
 
-    procedure Ordena(var Item: TItemArray);
+    procedure Ordena(var Item: TSelecionadosArray);
     var
       I, J: Integer;
-      Key: TItemInfo;
+      Key: TAtleta;
     begin
       for I := 1 to High(Item) do
       begin
@@ -247,7 +328,9 @@ idJogo,confere : String;
         Item[J + 1] := Key;
       end;
     end;
+
 begin
+
 pnConfirma.Visible:=False;
 pnJogos.Visible := False;
 ResDupla1.Value:=0;
@@ -273,14 +356,13 @@ if (ComboBox1.ItemIndex<0) or
    exit;
    End;
 
-Selecionados[0].ID := Integer(ComboBox1.Items.Objects[ComboBox1.ItemIndex]);
-Selecionados[0].Nome := ComboBox1.Items[ComboBox1.ItemIndex];
-Selecionados[1].ID := Integer(ComboBox2.Items.Objects[ComboBox2.ItemIndex]);
-Selecionados[1].Nome := ComboBox2.Items[ComboBox2.ItemIndex];
-Selecionados[2].ID := Integer(ComboBox3.Items.Objects[ComboBox3.ItemIndex]);
-Selecionados[2].Nome := ComboBox3.Items[ComboBox3.ItemIndex];
-Selecionados[3].ID := Integer(ComboBox4.Items.Objects[ComboBox4.ItemIndex]);
-Selecionados[3].Nome := ComboBox4.Items[ComboBox4.ItemIndex];
+
+
+
+Selecionados[0] := PegaAtleta(Integer(ComboBox1.Items.Objects[ComboBox1.ItemIndex]));
+Selecionados[1] := PegaAtleta(Integer(ComboBox2.Items.Objects[ComboBox2.ItemIndex]));
+Selecionados[2] := PegaAtleta(Integer(ComboBox3.Items.Objects[ComboBox3.ItemIndex]));
+Selecionados[3] := PegaAtleta(Integer(ComboBox4.Items.Objects[ComboBox4.ItemIndex]));
 
 if HasDuplicateIDs(Selecionados) then
    Begin
@@ -305,20 +387,38 @@ if idjogo <> '' then
    exit;
    end;
 
-lbDupla1.Text := Selecionados[0].Nome+'/'+Selecionados[1].Nome;
-lbDupla2.Text := Selecionados[2].Nome+'/'+Selecionados[3].Nome;
+lbDupla1.Text := Selecionados[0].Nome+'/'+Selecionados[1].Nome+#13+'Ranking '+IntToStr(Selecionados[0].Ranking+Selecionados[1].Ranking);
+lbDupla1.Hint := Selecionados[0].Nome+'/'+Selecionados[1].Nome;
+lbDupla2.Text := Selecionados[2].Nome+'/'+Selecionados[3].Nome+#13+'Ranking '+IntToStr(Selecionados[2].Ranking+Selecionados[3].Ranking);
+lbDupla2.Hint := Selecionados[2].Nome+'/'+Selecionados[3].Nome;
 
-lbDupla3.Text := Selecionados[0].Nome+'/'+Selecionados[3].Nome;
-lbDupla4.Text := Selecionados[2].Nome+'/'+Selecionados[1].Nome;
+lbDupla3.Text := Selecionados[0].Nome+'/'+Selecionados[3].Nome+#13+'Ranking '+IntToStr(Selecionados[0].Ranking+Selecionados[3].Ranking);
+lbDupla3.Hint := Selecionados[0].Nome+'/'+Selecionados[3].Nome;
+lbDupla4.Text := Selecionados[2].Nome+'/'+Selecionados[1].Nome+#13+'Ranking '+IntToStr(Selecionados[2].Ranking+Selecionados[1].Ranking);
+lbDupla4.Hint := Selecionados[2].Nome+'/'+Selecionados[1].Nome;
 
-lbDupla5.Text := Selecionados[0].Nome+'/'+Selecionados[2].Nome;
-lbDupla6.Text := Selecionados[3].Nome+'/'+Selecionados[1].Nome;
+lbDupla5.Text := Selecionados[0].Nome+'/'+Selecionados[2].Nome+#13+'Ranking '+IntToStr(Selecionados[0].Ranking+Selecionados[2].Ranking);
+lbDupla5.Hint := Selecionados[0].Nome+'/'+Selecionados[2].Nome;
+lbDupla6.Text := Selecionados[3].Nome+'/'+Selecionados[1].Nome+#13+'Ranking '+IntToStr(Selecionados[3].Ranking+Selecionados[1].Ranking);
+lbDupla6.Hint := Selecionados[3].Nome+'/'+Selecionados[1].Nome;
 pnJogos.Visible := True;
+
+{$IFDEF DEBUG}
+ResDupla1.Value:=15;
+ResDupla2.Value:=8;
+ResDupla3.Value:=8;
+ResDupla4.Value:=15;
+ResDupla5.Value:=17;
+ResDupla6.Value:=15;
+{$ENDIF}
 end;
 
-procedure TForm2.Button3Click(Sender: TObject);
+procedure TForm2.btnPreparaGravacaoClick(Sender: TObject);
 Var
 max : integer;
+IndiceA, IndiceB : Extended;
+RankingA, RankingB  : String;
+
   function fnDiferenca(Valor1, Valor2: double; baixo, alto: Integer): Boolean;
   var
     diferenca: Integer;
@@ -326,6 +426,7 @@ max : integer;
     diferenca := trunc(Valor1) - Trunc(Valor2);
     Result := (diferenca >= baixo) and (diferenca <= alto);
   end;
+
   function Enche(const S: string; Tamanho: Integer; Lado : string): string;
   begin
     Result := S;
@@ -335,23 +436,56 @@ max : integer;
          else
          Result := ' ' + Result;
   end;
+
   Function PegaTamanhoMaximo():integer;
   Var
   Maximo : Integer;
   Begin
-  Maximo:= Length(lbDupla1.Text);
-  if Length(lbDupla2.Text)>Maximo then
-     Maximo:= Length(lbDupla2.Text);
-  if Length(lbDupla3.Text)>Maximo then
-     Maximo:= Length(lbDupla3.Text);
-  if Length(lbDupla4.Text)>Maximo then
-     Maximo:= Length(lbDupla4.Text);
-  if Length(lbDupla5.Text)>Maximo then
-     Maximo:= Length(lbDupla5.Text);
-  if Length(lbDupla6.Text)>Maximo then
-     Maximo:= Length(lbDupla6.Text);
+  Maximo:= Length(lbDupla1.hint);
+  if Length(lbDupla2.hint)>Maximo then
+     Maximo:= Length(lbDupla2.hint);
+  if Length(lbDupla3.hint)>Maximo then
+     Maximo:= Length(lbDupla3.hint);
+  if Length(lbDupla4.hint)>Maximo then
+     Maximo:= Length(lbDupla4.hint);
+  if Length(lbDupla5.hint)>Maximo then
+     Maximo:= Length(lbDupla5.hint);
+  if Length(lbDupla6.hint)>Maximo then
+     Maximo:= Length(lbDupla6.hint);
   Result := Maximo;
   End;
+
+  Procedure CalculaInidice(A,B,C,D : Integer; ValorAb, ValorCD : Integer; Var ResA,ResB : TNumberBox);
+  Begin
+  ResA.Tag:=0;
+  ResB.Tag:=0;
+  if Selecionados[A].Ranking+Selecionados[B].Ranking = Selecionados[C].Ranking+Selecionados[D].Ranking then
+     Begin
+     IndiceA := 1;
+     IndiceB := 1;
+     end else
+     if Selecionados[A].Ranking+Selecionados[B].Ranking > Selecionados[C].Ranking+Selecionados[D].Ranking then
+        Begin
+         IndiceA := (Selecionados[C].Ranking+Selecionados[D].Ranking) / (Selecionados[A].Ranking+Selecionados[B].Ranking);
+         IndiceB := (Selecionados[A].Ranking+Selecionados[B].Ranking) / (Selecionados[C].Ranking+Selecionados[D].Ranking);
+        end else
+        Begin
+        IndiceA := (Selecionados[A].Ranking+Selecionados[B].Ranking) / (Selecionados[C].Ranking+Selecionados[D].Ranking);
+        IndiceB := (Selecionados[C].Ranking+Selecionados[D].Ranking) / (Selecionados[A].Ranking+Selecionados[B].Ranking);
+        end;
+  if ValorAb > ValorCD then
+     Begin
+     RankingA := ' +'+FormatFloat('00',(ValorAb - ValorCD)*IndiceA);
+     RankingB := ' .';
+     ResA.Tag:=Trunc((ValorAb - ValorCD)*IndiceA);
+     End else
+     Begin
+     RankingA := ' .';
+     RankingB := ' +'+FormatFloat('00',(ValorCD - ValorAb)*IndiceB);
+     ResB.Tag:=Trunc((ValorCD - ValorAb)*IndiceB);
+     end;
+  End;
+
 begin
 pnConfirma.Visible:=False;
 //verificando se todos os jogos alcaram >=15 pontos
@@ -370,9 +504,22 @@ if (resDupla1.Value+resDupla2.Value<15) or
    End;
 max:= PegaTamanhoMaximo()+1;
 
-lbSeq1.Text := Enche(lbDupla1.Text,max,'direita')+' '+FormatFloat('00',resDupla1.Value)+' X '+FormatFloat('00',resDupla2.Value)+Enche(lbDupla2.Text,max,'esquerda');
-lbSeq2.Text := Enche(lbDupla3.Text,max,'direita')+' '+FormatFloat('00',resDupla3.Value)+' X '+FormatFloat('00',resDupla4.Value)+Enche(lbDupla4.Text,max,'esquerda');
-lbSeq3.Text := Enche(lbDupla5.Text,max,'direita')+' '+FormatFloat('00',resDupla5.Value)+' X '+FormatFloat('00',resDupla6.Value)+Enche(lbDupla6.Text,max,'esquerda');
+//Calculando
+//Sequencia 1   0/1 x 2/3
+CalculaInidice(0,1,2,3,Trunc(resDupla1.Value),Trunc(resDupla2.Value),resDupla1,resDupla2);
+lbSeq1.Text := Enche(lbDupla1.hint,max,'direita')+' '+FormatFloat('00',resDupla1.Value)+' X '+FormatFloat('00',resDupla2.Value)+Enche(lbDupla2.hint,max,'esquerda');
+lbRan1.Text := Enche(RankingA ,max,'direita')+'        '+ Enche(RankingB,max,'esquerda');
+
+//Sequencia 2   0/3 x 2/1
+CalculaInidice(0,3,2,1,Trunc(resDupla3.Value),Trunc(resDupla4.Value),resDupla3,resDupla4);
+lbSeq2.Text := Enche(lbDupla3.hint,max,'direita')+' '+FormatFloat('00',resDupla3.Value)+' X '+FormatFloat('00',resDupla4.Value)+Enche(lbDupla4.hint,max,'esquerda');
+lbRan2.Text := Enche(RankingA ,max,'direita')+'        '+ Enche(RankingB,max,'esquerda');
+
+//Sequencia 3   0/2 x 3/1
+CalculaInidice(0,2,3,1,Trunc(resDupla5.Value),Trunc(resDupla6.Value),resDupla5,resDupla6);
+lbSeq3.Text := Enche(lbDupla5.hint,max,'direita')+' '+FormatFloat('00',resDupla5.Value)+' X '+FormatFloat('00',resDupla6.Value)+Enche(lbDupla6.hint,max,'esquerda');
+lbRan3.Text := Enche(RankingA ,max,'direita')+'        '+ Enche(RankingB,max,'esquerda');
+
 pnConfirma.Visible:=True;
 end;
 

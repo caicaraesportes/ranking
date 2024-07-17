@@ -26,39 +26,57 @@ inherited Form2_LgXhdpiPh: TForm2_LgXhdpiPh
       Position.Y = 111.000000000000000000
       Size.Width = 450.000000000000000000
     end
-    inherited Panel6: TPanel
+    inherited pnSeq1: TPanel
       Size.Width = 450.000000000000000000
     end
-    inherited Panel7: TPanel
+    inherited pnSeq3: TPanel
       Position.Y = 74.000000000000000000
       Size.Width = 450.000000000000000000
     end
-    inherited Panel8: TPanel
+    inherited pnSeq2: TPanel
       Position.Y = 37.000000000000000000
       Size.Width = 450.000000000000000000
     end
-  end
-  inherited Button3: TButton
-    Size.Width = 450.000000000000000000
+    inherited btnPreparaGravacao: TButton
+      Size.Width = 450.000000000000000000
+    end
   end
   inherited Memo1: TMemo
     Size.Width = 450.000000000000000000
-    Size.Height = 244.000000000000000000
+    Size.Height = 193.000000000000000000
     Viewport.Width = 450.000000000000000000
-    Viewport.Height = 244.000000000000000000
+    Viewport.Height = 193.000000000000000000
   end
   inherited pnConfirma: TPanel
     Size.Width = 450.000000000000000000
     inherited lbSeq1: TLabel
+      Margins.Bottom = 5.000000000000000000
       Size.Width = 450.000000000000000000
     end
     inherited lbSeq3: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 88.000000000000000000
       Size.Width = 450.000000000000000000
     end
     inherited lbSeq2: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 44.000000000000000000
       Size.Width = 450.000000000000000000
     end
     inherited btConfirmar: TButton
+      Position.Y = 132.000000000000000000
+      Size.Width = 450.000000000000000000
+    end
+    inherited lbRan1: TLabel
+      Position.Y = 22.000000000000000000
+      Size.Width = 450.000000000000000000
+    end
+    inherited lbRan2: TLabel
+      Position.Y = 66.000000000000000000
+      Size.Width = 450.000000000000000000
+    end
+    inherited lbRan3: TLabel
+      Position.Y = 110.000000000000000000
       Size.Width = 450.000000000000000000
     end
   end
