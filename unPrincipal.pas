@@ -9,7 +9,6 @@ uses
   System.Generics.Collections,
   System.Actions,
   System.Net.URLClient, System.Net.HttpClientComponent,
-
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.ListBox, FMX.Edit, FMX.EditBox, FMX.NumberBox,
   FMX.DateTimeCtrls, FMX.Memo.Types, FMX.ScrollBox, FMX.Memo;
@@ -68,11 +67,15 @@ type
     lbRan1: TLabel;
     lbRan2: TLabel;
     lbRan3: TLabel;
+    btSair: TSpeedButton;
+    Button1: TButton;
     procedure Button2Click(Sender: TObject);
     procedure btnPreparaGravacaoClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btConfirmarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btSairClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     function fGetApi(tabela: string; Campo: String; Condicao: String = ''): string;
@@ -95,7 +98,7 @@ var
 Const
    ApiKey  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3aHVua2tuZWd0dm9kaGF3dmx3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjExNTU2OTksImV4cCI6MjAzNjczMTY5OX0.CpPU_zAqYY803HWWAhpdSqGg_WZiNka5HR3_W6W0mvo';
    BaseURL = 'https://swhunkknegtvodhawvlw.supabase.co';
-   senha = 'V2gTvsgwwNYlaJh1';
+   senhabd = 'V2gTvsgwwNYlaJh1';
 
 implementation
 
@@ -110,6 +113,7 @@ implementation
 procedure TForm2.Log(texto : String);
 Begin
   Memo1.lines.add(texto);
+  Application.ProcessMessages;
 End;
 
 
@@ -281,6 +285,66 @@ Begin
       raise;
     end;
 End;
+
+procedure TForm2.Button1Click(Sender: TObject);
+var
+  HTTPClient: THTTPClient;
+  RequestBody: TStringStream;
+  Response: IHTTPResponse;
+  JsonObj: TJSONObject;
+  SequenciasArray: TJSONArray;
+  SequenciaObj: TJSONObject;
+begin
+  HTTPClient := THTTPClient.Create;
+  try
+    HTTPClient.CustomHeaders['apikey'] := ApiKey;
+    HTTPClient.CustomHeaders['Accept'] := 'application/json';
+    HTTPClient.CustomHeaders['Content-Type'] := 'application/json';
+    HTTPClient.SecureProtocols := [THTTPSecureProtocol.TLS12];
+
+    JsonObj := TJSONObject.Create;
+    try
+      JsonObj.AddPair('param1', 'true');  // Adicione os parâmetros corretamente
+      JsonObj.AddPair('param2', '2023-07-20');
+
+      SequenciasArray := TJSONArray.Create;
+
+      // Adicione o conteúdo JSON correspondente às sequências
+      SequenciaObj := TJSONObject.Create;
+      SequenciaObj.AddPair('sequencia', TJSONNumber.Create(1));
+      SequenciaObj.AddPair('pontos_a', TJSONNumber.Create(10));
+      SequenciaObj.AddPair('pontos_b', TJSONNumber.Create(20));
+      SequenciaObj.AddPair('atletas', '[{"id_atleta": 1, "pontos_ranking": 30}, {"id_atleta": 2, "pontos_ranking": 40}]');
+      SequenciasArray.AddElement(SequenciaObj);
+
+      // Continue adicionando outras sequências conforme necessário
+
+      JsonObj.AddPair('param3', SequenciasArray.ToJSON);
+
+      RequestBody := TStringStream.Create(JsonObj.ToJSON, TEncoding.UTF8);
+      try
+        Response := HTTPClient.Post(BaseURL+'/rest/v1/rpc/inserir_jogo_e_sequencias', RequestBody);
+
+        if Response.StatusCode = 200 then
+        begin
+          // Processar a resposta se necessário
+          ShowMessage(Response.ContentAsString);
+        end
+        else
+        begin
+          // Tratar erros
+          ShowMessage('Erro: ' + Response.StatusText);
+        end;
+      finally
+        RequestBody.Free;
+      end;
+    finally
+      JsonObj.Free;
+    end;
+  finally
+    HTTPClient.Free;
+  end;
+end;
 
 procedure TForm2.Button2Click(Sender: TObject);
 Var
@@ -523,6 +587,11 @@ lbRan3.Text := Enche(RankingA ,max,'direita')+'        '+ Enche(RankingB,max,'es
 pnConfirma.Visible:=True;
 end;
 
+procedure TForm2.btSairClick(Sender: TObject);
+begin
+Close();
+end;
+
 function TForm2.fAbreTabelaAqrquivoAPI(): String;
 var
   jsonArray: TJSONArray;
@@ -545,11 +614,11 @@ result := '';
        result := Response.ContentAsString;
     except on ex:exception do
       begin
-      Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Erro fAbreTabelaAqrquivoAPI: ' + ex.Message);
+      Log(FormatDateTime('hh:nn:ss', Now()) + ' Erro fAbreTabelaAqrquivoAPI: ' + ex.Message);
       exit;
       end;
     end;
-  Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Busca de Jogadores OK = ' + Response.StatusCode.ToString );
+  Log(FormatDateTime('hh:nn:ss', Now()) + ' Busca de Jogadores OK = ' + Response.StatusCode.ToString );
 end;
 
 function TForm2.fPostApi(tabela: string; Campos: String): boolean;
@@ -570,15 +639,15 @@ try
   if Response.StatusCode = 201 then
      Begin
      Result:=true;
-     Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Gravado : '+Response.StatusCode.ToString +' '+Response.ContentAsString(TEncoding.UTF8));
+     Log(FormatDateTime('hh:nn:ss', Now()) + ' Gravado : '+Response.StatusCode.ToString +' '+Response.ContentAsString(TEncoding.UTF8));
      end else
      Begin
-     Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Erro fPostApi HTTP: ' + Response.StatusText);
+     Log(FormatDateTime('hh:nn:ss', Now()) + ' Erro fPostApi HTTP: ' + Response.StatusText);
      End;
   except
     on e: exception do
        Begin
-       Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Falha no fPostApi '+campos+' Motivo ... ' + e.Message);
+       Log(FormatDateTime('hh:nn:ss', Now()) + ' Falha no fPostApi '+campos+' Motivo ... ' + e.Message);
        End;
   end;
 finally
@@ -607,11 +676,11 @@ result := '';
     Response := HTTPClient.Get(BaseURL+'/rest/v1/'+tabela+'?'+condicao+'&select='+Campo);
     except on ex:exception do
       begin
-      Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Erro fGetApi: ' + ex.Message);
+      Log(FormatDateTime('hh:nn:ss', Now()) + ' Erro fGetApi: ' + ex.Message);
       exit;
       end;
     end;
-  Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Busca OK : ' + Response.StatusCode.ToString);
+  Log(FormatDateTime('hh:nn:ss', Now()) + ' Busca OK : ' + Response.StatusCode.ToString);
 
   if Response.StatusCode.ToSingle = 400 then
      exit;
@@ -624,18 +693,18 @@ result := '';
       jsonObject := jsonArray.Items[0] as TJSONObject;
       if NOT Assigned(jsonObject) then
          Begin
-         Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' Não foi possível verificar o retorno do servidor (JSON inválido)');
+         Log(FormatDateTime('hh:nn:ss', Now()) + ' Não foi possível verificar o retorno do servidor (JSON inválido)');
          End;
     except on ex:exception do
       begin
-      Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' '+ex.Message);
+      Log(FormatDateTime('hh:nn:ss', Now()) + ' '+ex.Message);
       end;
     end;
     Application.ProcessMessages;
 
   if jsonObject.TryGetValue('error', JsonRet) then
      begin
-      Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' jsonObject.TryGetValue(error, JsonRet) '+jsonRet.Values['message'].Value);
+      Log(FormatDateTime('hh:nn:ss', Now()) + ' jsonObject.TryGetValue(error, JsonRet) '+jsonRet.Values['message'].Value);
       exit;
      end;
 
@@ -646,7 +715,7 @@ result := '';
          result := '';
      end else
      Begin
-     Log(FormatDateTime('dd/mm/yyyy dd/mm/yyyy hh:nn:ss', Now()) + ' jsonObject.TryGetValue(campo, valor) '+Response.StatusCode.ToString +' '+Response.ContentAsString);
+     Log(FormatDateTime('hh:nn:ss', Now()) + ' jsonObject.TryGetValue(campo, valor) '+Response.StatusCode.ToString +' '+Response.ContentAsString);
      End;
   finally
   if Assigned(jsonObject) then

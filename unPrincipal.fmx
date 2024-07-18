@@ -13,21 +13,38 @@ object Form2: TForm2
   object Panel1: TPanel
     Align = Top
     Size.Width = 411.000000000000000000
-    Size.Height = 49.000000000000000000
+    Size.Height = 36.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 78
     object Label2: TLabel
       Align = Left
       Size.Width = 277.000000000000000000
-      Size.Height = 49.000000000000000000
+      Size.Height = 36.000000000000000000
       Size.PlatformDefault = False
       Text = 'Selecione os 4 jogadores'
       TabOrder = 84
     end
+    object btSair: TSpeedButton
+      Align = Right
+      ModalResult = 8
+      Position.X = 360.000000000000000000
+      Size.Width = 51.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Sair'
+      OnClick = btSairClick
+    end
+    object Button1: TButton
+      Position.X = 168.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 87
+      Text = 'TEste '
+      OnClick = Button1Click
+    end
   end
   object Panel4: TPanel
     Align = Top
-    Position.Y = 49.000000000000000000
+    Position.Y = 36.000000000000000000
     Size.Width = 411.000000000000000000
     Size.Height = 128.000000000000000000
     Size.PlatformDefault = False
@@ -110,13 +127,16 @@ object Form2: TForm2
   end
   object pnJogos: TPanel
     Align = Top
-    Position.Y = 177.000000000000000000
+    Position.Y = 164.000000000000000000
     Size.Width = 411.000000000000000000
-    Size.Height = 176.000000000000000000
+    Size.Height = 202.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 80
     object Label1: TLabel
-      Align = Top
+      Align = MostTop
+      Margins.Top = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 5.000000000000000000
       Size.Width = 411.000000000000000000
       Size.Height = 29.000000000000000000
       Size.PlatformDefault = False
@@ -126,13 +146,14 @@ object Form2: TForm2
     end
     object pnSeq1: TPanel
       Align = Top
-      Position.Y = 29.000000000000000000
+      Position.Y = 39.000000000000000000
       Size.Width = 411.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 82
       object lbDupla1: TLabel
         Align = Left
+        StyledSettings = [Family, Style, FontColor]
         Margins.Left = 2.000000000000000000
         Margins.Top = 1.000000000000000000
         Margins.Bottom = 1.000000000000000000
@@ -141,6 +162,7 @@ object Form2: TForm2
         Size.Width = 170.000000000000000000
         Size.Height = 35.000000000000000000
         Size.PlatformDefault = False
+        TextSettings.Font.Size = 13.000000000000000000
         TextSettings.VertAlign = Leading
         Text = 'Dupla 1'
         TabOrder = 86
@@ -160,6 +182,7 @@ object Form2: TForm2
       end
       object lbDupla2: TLabel
         Align = Left
+        StyledSettings = [Family, Style, FontColor]
         Margins.Left = 2.000000000000000000
         Margins.Top = 1.000000000000000000
         Margins.Bottom = 1.000000000000000000
@@ -168,6 +191,7 @@ object Form2: TForm2
         Size.Width = 155.000000000000000000
         Size.Height = 35.000000000000000000
         Size.PlatformDefault = False
+        TextSettings.Font.Size = 13.000000000000000000
         TextSettings.HorzAlign = Trailing
         TextSettings.VertAlign = Leading
         Text = 'Dupla 2'
@@ -206,13 +230,14 @@ object Form2: TForm2
     end
     object pnSeq3: TPanel
       Align = Top
-      Position.Y = 103.000000000000000000
+      Position.Y = 113.000000000000000000
       Size.Width = 411.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 84
       object lbDupla5: TLabel
         Align = Left
+        StyledSettings = [Family, Style, FontColor]
         Margins.Left = 2.000000000000000000
         Margins.Top = 1.000000000000000000
         Margins.Bottom = 1.000000000000000000
@@ -221,6 +246,7 @@ object Form2: TForm2
         Size.Width = 170.000000000000000000
         Size.Height = 35.000000000000000000
         Size.PlatformDefault = False
+        TextSettings.Font.Size = 13.000000000000000000
         TextSettings.VertAlign = Leading
         Text = 'Dupla 5'
         TabOrder = 85
@@ -240,6 +266,7 @@ object Form2: TForm2
       end
       object lbDupla6: TLabel
         Align = Left
+        StyledSettings = [Family, Style, FontColor]
         Margins.Left = 2.000000000000000000
         Margins.Top = 1.000000000000000000
         Margins.Bottom = 1.000000000000000000
@@ -248,6 +275,7 @@ object Form2: TForm2
         Size.Width = 155.000000000000000000
         Size.Height = 35.000000000000000000
         Size.PlatformDefault = False
+        TextSettings.Font.Size = 13.000000000000000000
         TextSettings.HorzAlign = Trailing
         TextSettings.VertAlign = Leading
         Text = 'Dupla 6'
@@ -286,13 +314,14 @@ object Form2: TForm2
     end
     object pnSeq2: TPanel
       Align = Top
-      Position.Y = 66.000000000000000000
+      Position.Y = 76.000000000000000000
       Size.Width = 411.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 83
       object lbDupla3: TLabel
         Align = Left
+        StyledSettings = [Family, Style, FontColor]
         Margins.Left = 2.000000000000000000
         Margins.Top = 1.000000000000000000
         Margins.Bottom = 1.000000000000000000
@@ -301,6 +330,7 @@ object Form2: TForm2
         Size.Width = 170.000000000000000000
         Size.Height = 35.000000000000000000
         Size.PlatformDefault = False
+        TextSettings.Font.Size = 13.000000000000000000
         TextSettings.VertAlign = Leading
         Text = 'Dupla 3'
         TabOrder = 86
@@ -320,6 +350,7 @@ object Form2: TForm2
       end
       object lbDupla4: TLabel
         Align = Left
+        StyledSettings = [Family, Style, FontColor]
         Margins.Left = 2.000000000000000000
         Margins.Top = 1.000000000000000000
         Margins.Bottom = 1.000000000000000000
@@ -328,6 +359,7 @@ object Form2: TForm2
         Size.Width = 155.000000000000000000
         Size.Height = 35.000000000000000000
         Size.PlatformDefault = False
+        TextSettings.Font.Size = 13.000000000000000000
         TextSettings.HorzAlign = Trailing
         TextSettings.VertAlign = Leading
         Text = 'Dupla 4'
@@ -365,10 +397,10 @@ object Form2: TForm2
       end
     end
     object btnPreparaGravacao: TButton
-      Align = Top
-      Position.Y = 140.000000000000000000
+      Align = Bottom
+      Position.Y = 159.000000000000000000
       Size.Width = 411.000000000000000000
-      Size.Height = 36.000000000000000000
+      Size.Height = 43.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 81
       Text = 'Prepara grava'#231#227'o dos jogos'
@@ -380,22 +412,22 @@ object Form2: TForm2
     DataDetectorTypes = []
     Align = Client
     Size.Width = 411.000000000000000000
-    Size.Height = 97.000000000000000000
+    Size.Height = 70.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 82
     Viewport.Width = 407.000000000000000000
-    Viewport.Height = 93.000000000000000000
+    Viewport.Height = 66.000000000000000000
   end
   object pnConfirma: TPanel
     Align = Top
-    Position.Y = 353.000000000000000000
+    Position.Y = 366.000000000000000000
     Size.Width = 411.000000000000000000
-    Size.Height = 149.000000000000000000
+    Size.Height = 163.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 83
     object lbSeq1: TLabel
       Align = Top
-      StyledSettings = [Size, Style, FontColor]
+      StyledSettings = [Style, FontColor]
       Size.Width = 411.000000000000000000
       Size.Height = 17.000000000000000000
       Size.PlatformDefault = False
@@ -408,7 +440,7 @@ object Form2: TForm2
     end
     object lbSeq3: TLabel
       Align = Top
-      StyledSettings = [Size, Style, FontColor]
+      StyledSettings = [Style, FontColor]
       Position.Y = 78.000000000000000000
       Size.Width = 411.000000000000000000
       Size.Height = 17.000000000000000000
@@ -421,7 +453,7 @@ object Form2: TForm2
     end
     object lbSeq2: TLabel
       Align = Top
-      StyledSettings = [Size, Style, FontColor]
+      StyledSettings = [Style, FontColor]
       Position.Y = 39.000000000000000000
       Size.Width = 411.000000000000000000
       Size.Height = 17.000000000000000000
@@ -433,10 +465,10 @@ object Form2: TForm2
       TabOrder = 1
     end
     object btConfirmar: TButton
-      Align = Top
-      Position.Y = 117.000000000000000000
+      Align = Bottom
+      Position.Y = 118.000000000000000000
       Size.Width = 411.000000000000000000
-      Size.Height = 33.000000000000000000
+      Size.Height = 45.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 6
       Text = 'Confirmar Grava'#231#227'o'
@@ -444,7 +476,7 @@ object Form2: TForm2
     end
     object lbRan1: TLabel
       Align = Top
-      StyledSettings = [Size, Style, FontColor]
+      StyledSettings = [Style, FontColor]
       Margins.Bottom = 5.000000000000000000
       Position.Y = 17.000000000000000000
       Size.Width = 411.000000000000000000
@@ -458,7 +490,7 @@ object Form2: TForm2
     end
     object lbRan2: TLabel
       Align = Top
-      StyledSettings = [Size, Style, FontColor]
+      StyledSettings = [Style, FontColor]
       Margins.Bottom = 5.000000000000000000
       Position.Y = 56.000000000000000000
       Size.Width = 411.000000000000000000
@@ -472,7 +504,7 @@ object Form2: TForm2
     end
     object lbRan3: TLabel
       Align = Top
-      StyledSettings = [Size, Style, FontColor]
+      StyledSettings = [Style, FontColor]
       Margins.Bottom = 5.000000000000000000
       Position.Y = 95.000000000000000000
       Size.Width = 411.000000000000000000

@@ -11,44 +11,36 @@ inherited frmPrincipal: TfrmPrincipal
       end
     end
   end
-  inherited pnJogos: TPanel
-    inherited Label1: TLabel
-      Position.Y = 111.000000000000000000
-    end
-    inherited pnSeq3: TPanel
-      Position.Y = 74.000000000000000000
-    end
-    inherited pnSeq2: TPanel
-      Position.Y = 37.000000000000000000
-    end
-  end
   inherited Memo1: TMemo
     Viewport.Width = 411.000000000000000000
-    Viewport.Height = 97.000000000000000000
+    Viewport.Height = 70.000000000000000000
   end
   inherited pnConfirma: TPanel
     inherited lbSeq1: TLabel
       Margins.Bottom = 5.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbSeq3: TLabel
       Margins.Bottom = 5.000000000000000000
       Position.Y = 88.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbSeq2: TLabel
       Margins.Bottom = 5.000000000000000000
       Position.Y = 44.000000000000000000
-    end
-    inherited btConfirmar: TButton
-      Position.Y = 132.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbRan1: TLabel
       Position.Y = 22.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbRan2: TLabel
       Position.Y = 66.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbRan3: TLabel
       Position.Y = 110.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
   end
 end

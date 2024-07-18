@@ -4,6 +4,9 @@ inherited Form2_Surface: TForm2_Surface
   DesignerMasterStyle = 3
   inherited Panel1: TPanel
     Size.Width = 1080.000000000000000000
+    inherited btSair: TSpeedButton
+      Position.X = 1029.000000000000000000
+    end
   end
   inherited Panel4: TPanel
     Size.Width = 1080.000000000000000000
@@ -26,18 +29,15 @@ inherited Form2_Surface: TForm2_Surface
   inherited pnJogos: TPanel
     Size.Width = 1080.000000000000000000
     inherited Label1: TLabel
-      Position.Y = 111.000000000000000000
       Size.Width = 1080.000000000000000000
     end
     inherited pnSeq1: TPanel
       Size.Width = 1080.000000000000000000
     end
     inherited pnSeq3: TPanel
-      Position.Y = 74.000000000000000000
       Size.Width = 1080.000000000000000000
     end
     inherited pnSeq2: TPanel
-      Position.Y = 37.000000000000000000
       Size.Width = 1080.000000000000000000
     end
     inherited btnPreparaGravacao: TButton
@@ -46,41 +46,46 @@ inherited Form2_Surface: TForm2_Surface
   end
   inherited Memo1: TMemo
     Size.Width = 1080.000000000000000000
-    Size.Height = 1418.000000000000000000
+    Size.Height = 1391.000000000000000000
     Viewport.Width = 1080.000000000000000000
-    Viewport.Height = 1418.000000000000000000
+    Viewport.Height = 1391.000000000000000000
   end
   inherited pnConfirma: TPanel
     Size.Width = 1080.000000000000000000
     inherited lbSeq1: TLabel
       Margins.Bottom = 5.000000000000000000
       Size.Width = 1080.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbSeq3: TLabel
       Margins.Bottom = 5.000000000000000000
       Position.Y = 88.000000000000000000
       Size.Width = 1080.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbSeq2: TLabel
       Margins.Bottom = 5.000000000000000000
       Position.Y = 44.000000000000000000
       Size.Width = 1080.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited btConfirmar: TButton
-      Position.Y = 132.000000000000000000
       Size.Width = 1080.000000000000000000
     end
     inherited lbRan1: TLabel
       Position.Y = 22.000000000000000000
       Size.Width = 1080.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbRan2: TLabel
       Position.Y = 66.000000000000000000
       Size.Width = 1080.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
     inherited lbRan3: TLabel
       Position.Y = 110.000000000000000000
       Size.Width = 1080.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
     end
   end
 end
