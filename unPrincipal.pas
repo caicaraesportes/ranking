@@ -294,6 +294,8 @@ var
   JsonObj: TJSONObject;
   SequenciasArray: TJSONArray;
   SequenciaObj: TJSONObject;
+  AtletasArray: TJSONArray;
+  AtletaObj: TJSONObject;
 begin
   HTTPClient := THTTPClient.Create;
   try
@@ -304,8 +306,8 @@ begin
 
     JsonObj := TJSONObject.Create;
     try
-      JsonObj.AddPair('param1', 'true');  // Adicione os parâmetros corretamente
-      JsonObj.AddPair('param2', '2023-07-20');
+      JsonObj.AddPair('p_confere', '001002003004');
+      JsonObj.AddPair('p_data_jogo', '2023-07-20');
 
       SequenciasArray := TJSONArray.Create;
 
@@ -314,26 +316,38 @@ begin
       SequenciaObj.AddPair('sequencia', TJSONNumber.Create(1));
       SequenciaObj.AddPair('pontos_a', TJSONNumber.Create(10));
       SequenciaObj.AddPair('pontos_b', TJSONNumber.Create(20));
-      SequenciaObj.AddPair('atletas', '[{"id_atleta": 1, "pontos_ranking": 30}, {"id_atleta": 2, "pontos_ranking": 40}]');
+
+      AtletasArray := TJSONArray.Create;
+      AtletaObj := TJSONObject.Create;
+      AtletaObj.AddPair('id_atleta', TJSONNumber.Create(1));
+      AtletaObj.AddPair('pontos_ranking', TJSONNumber.Create(30));
+      AtletasArray.AddElement(AtletaObj);
+
+      AtletaObj := TJSONObject.Create;
+      AtletaObj.AddPair('id_atleta', TJSONNumber.Create(2));
+      AtletaObj.AddPair('pontos_ranking', TJSONNumber.Create(40));
+      AtletasArray.AddElement(AtletaObj);
+
+      SequenciaObj.AddPair('atletas', AtletasArray);
       SequenciasArray.AddElement(SequenciaObj);
 
       // Continue adicionando outras sequências conforme necessário
 
-      JsonObj.AddPair('param3', SequenciasArray.ToJSON);
+      JsonObj.AddPair('p_sequencias', SequenciasArray);
 
       RequestBody := TStringStream.Create(JsonObj.ToJSON, TEncoding.UTF8);
       try
         Response := HTTPClient.Post(BaseURL+'/rest/v1/rpc/inserir_jogo_e_sequencias', RequestBody);
 
-        if Response.StatusCode = 200 then
+        if Response.StatusCode = 204 then
         begin
           // Processar a resposta se necessário
-          ShowMessage(Response.ContentAsString);
+          Log('Gravado com sucesso! '+Response.ContentAsString);
         end
         else
         begin
           // Tratar erros
-          ShowMessage('Erro: ' + Response.StatusText);
+          Log('Erro: ' +IntToStr(Response.StatusCode)+'-'+ Response.StatusText +#13+Response.ContentAsString);
         end;
       finally
         RequestBody.Free;
@@ -345,6 +359,7 @@ begin
     HTTPClient.Free;
   end;
 end;
+
 
 procedure TForm2.Button2Click(Sender: TObject);
 Var

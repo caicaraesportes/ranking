@@ -37,7 +37,7 @@ object Form2: TForm2
     object Button1: TButton
       Position.X = 168.000000000000000000
       Position.Y = 8.000000000000000000
-      TabOrder = 87
+      TabOrder = 86
       Text = 'TEste '
       OnClick = Button1Click
     end
