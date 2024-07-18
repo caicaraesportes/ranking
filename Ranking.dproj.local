@@ -2,11 +2,11 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2024/07/16 14:45:59.000.076,=C:\Users\Fabiano\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2024/07/16 14:51:08.000.819,S:\AppRanking\unPrincipal.pas=C:\Users\Fabiano\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2024/07/16 14:51:08.000.819,S:\AppRanking\unPrincipal.fmx=C:\Users\Fabiano\Documents\Embarcadero\Studio\Projects\Unit2.fmx</Transaction>
-    <Transaction>2024/07/16 14:51:18.000.933,S:\AppRanking\Ranking.dproj=C:\Users\Fabiano\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>2024/07/16 14:51:08.000.819,C:\Users\Fabiano\Documents\Embarcadero\Studio\Projects\Unit2.fmx=S:\AppRanking\unPrincipal.fmx</Transaction>
+    <Transaction>2024/07/16 14:51:08.000.819,C:\Users\Fabiano\Documents\Embarcadero\Studio\Projects\Unit2.pas=S:\AppRanking\unPrincipal.pas</Transaction>
+    <Transaction>2024/07/16 14:51:18.000.933,C:\Users\Fabiano\Documents\Embarcadero\Studio\Projects\Project2.dproj=S:\AppRanking\Ranking.dproj</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="RX8N803ZY4H" Android64="RX8N803ZY4H"/>
+		<NoProfile Android="" Android64=""/>
 	</ActiveMobileDevice>
 </BorlandProject>

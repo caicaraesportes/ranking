@@ -6,7 +6,6 @@ inherited frmPrincipal: TfrmPrincipal
     Size.Width = 480.000000000000000000
     inherited btSair: TSpeedButton
       Position.X = 429.000000000000000000
-      Size.Height = 48.000000000000000000
     end
   end
   inherited Panel4: TPanel

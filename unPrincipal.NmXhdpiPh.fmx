@@ -6,7 +6,6 @@ inherited Form2_NmXhdpiPh: TForm2_NmXhdpiPh
     Size.Width = 400.000000000000000000
     inherited btSair: TSpeedButton
       Position.X = 349.000000000000000000
-      Size.Height = 48.000000000000000000
     end
   end
   inherited Panel4: TPanel

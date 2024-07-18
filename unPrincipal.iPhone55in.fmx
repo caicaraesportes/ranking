@@ -6,7 +6,6 @@ inherited Form2_iPhone55in: TForm2_iPhone55in
     Size.Width = 414.000000000000000000
     inherited btSair: TSpeedButton
       Position.X = 363.000000000000000000
-      Size.Height = 44.000000000000000000
     end
   end
   inherited Panel4: TPanel

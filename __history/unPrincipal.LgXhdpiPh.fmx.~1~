@@ -1,0 +1,89 @@
+inherited Form2_LgXhdpiPh: TForm2_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 3
+  inherited Panel1: TPanel
+    Size.Width = 450.000000000000000000
+    inherited btSair: TSpeedButton
+      Position.X = 399.000000000000000000
+      Size.Height = 48.000000000000000000
+    end
+  end
+  inherited Panel4: TPanel
+    Size.Width = 450.000000000000000000
+    inherited Panel3: TPanel
+      Size.Width = 156.000000000000000000
+      inherited Button2: TButton
+        Size.Width = 156.000000000000000000
+      end
+      inherited Label6: TLabel
+        Size.Width = 156.000000000000000000
+      end
+      inherited DateEdit1: TDateEdit
+        Size.Width = 156.000000000000000000
+      end
+    end
+  end
+  inherited pnJogos: TPanel
+    Size.Width = 450.000000000000000000
+    inherited Label1: TLabel
+      Size.Width = 450.000000000000000000
+    end
+    inherited pnSeq1: TPanel
+      Size.Width = 450.000000000000000000
+    end
+    inherited pnSeq3: TPanel
+      Size.Width = 450.000000000000000000
+    end
+    inherited pnSeq2: TPanel
+      Size.Width = 450.000000000000000000
+    end
+    inherited btnPreparaGravacao: TButton
+      Size.Width = 450.000000000000000000
+    end
+  end
+  inherited Memo1: TMemo
+    Size.Width = 450.000000000000000000
+    Size.Height = 166.000000000000000000
+    Viewport.Width = 450.000000000000000000
+    Viewport.Height = 166.000000000000000000
+  end
+  inherited pnConfirma: TPanel
+    Size.Width = 450.000000000000000000
+    inherited lbSeq1: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 450.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbSeq3: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 450.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbSeq2: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 44.000000000000000000
+      Size.Width = 450.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited btConfirmar: TButton
+      Size.Width = 450.000000000000000000
+    end
+    inherited lbRan1: TLabel
+      Position.Y = 22.000000000000000000
+      Size.Width = 450.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbRan2: TLabel
+      Position.Y = 66.000000000000000000
+      Size.Width = 450.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbRan3: TLabel
+      Position.Y = 110.000000000000000000
+      Size.Width = 450.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+  end
+end

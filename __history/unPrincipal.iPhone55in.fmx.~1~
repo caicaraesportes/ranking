@@ -1,0 +1,109 @@
+inherited Form2_iPhone55in: TForm2_iPhone55in
+  ClientHeight = 716
+  ClientWidth = 414
+  DesignerMasterStyle = 3
+  inherited Panel1: TPanel
+    Size.Width = 414.000000000000000000
+    inherited btSair: TSpeedButton
+      Position.X = 363.000000000000000000
+      Size.Height = 44.000000000000000000
+    end
+  end
+  inherited Panel4: TPanel
+    Size.Width = 414.000000000000000000
+    inherited Panel2: TPanel
+      inherited ComboBox1: TComboBox
+        Size.Height = 30.000000000000000000
+      end
+      inherited ComboBox2: TComboBox
+        Position.Y = 60.000000000000000000
+        Size.Height = 30.000000000000000000
+      end
+      inherited ComboBox3: TComboBox
+        Position.Y = 30.000000000000000000
+        Size.Height = 30.000000000000000000
+      end
+      inherited ComboBox4: TComboBox
+        Position.Y = 90.000000000000000000
+        Size.Height = 30.000000000000000000
+      end
+    end
+    inherited Panel3: TPanel
+      Size.Width = 120.000000000000000000
+      inherited Button2: TButton
+        Size.Width = 120.000000000000000000
+      end
+      inherited Label6: TLabel
+        Position.Y = 28.000000000000000000
+        Size.Width = 120.000000000000000000
+      end
+      inherited DateEdit1: TDateEdit
+        Position.Y = 55.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 30.000000000000000000
+      end
+    end
+  end
+  inherited pnJogos: TPanel
+    Size.Width = 414.000000000000000000
+    inherited Label1: TLabel
+      Size.Width = 414.000000000000000000
+    end
+    inherited pnSeq1: TPanel
+      Size.Width = 414.000000000000000000
+    end
+    inherited pnSeq3: TPanel
+      Size.Width = 414.000000000000000000
+    end
+    inherited pnSeq2: TPanel
+      Size.Width = 414.000000000000000000
+    end
+    inherited btnPreparaGravacao: TButton
+      Size.Width = 414.000000000000000000
+    end
+  end
+  inherited Memo1: TMemo
+    Size.Width = 414.000000000000000000
+    Size.Height = 187.000000000000000000
+    Viewport.Width = 414.000000000000000000
+    Viewport.Height = 187.000000000000000000
+  end
+  inherited pnConfirma: TPanel
+    Size.Width = 414.000000000000000000
+    inherited lbSeq1: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 414.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbSeq3: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 414.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbSeq2: TLabel
+      Margins.Bottom = 5.000000000000000000
+      Position.Y = 44.000000000000000000
+      Size.Width = 414.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited btConfirmar: TButton
+      Size.Width = 414.000000000000000000
+    end
+    inherited lbRan1: TLabel
+      Position.Y = 22.000000000000000000
+      Size.Width = 414.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbRan2: TLabel
+      Position.Y = 66.000000000000000000
+      Size.Width = 414.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+    inherited lbRan3: TLabel
+      Position.Y = 110.000000000000000000
+      Size.Width = 414.000000000000000000
+      TextSettings.Font.Size = 11.000000000000000000
+    end
+  end
+end
